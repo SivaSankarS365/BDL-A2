@@ -71,7 +71,7 @@ x-airflow-common:
     # WARNING: Use _PIP_ADDITIONAL_REQUIREMENTS option ONLY for a quick checks
     # for other purpose (development, test and especially production usage) build/extend Airflow image.
     # _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
-    _PIP_ADDITIONAL_REQUIREMENTS: "beautifulsoup4"
+    _PIP_ADDITIONAL_REQUIREMENTS: "beautifulsoup4 geopandas geodatasets matplotlib apache-beam pandas numpy"
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
@@ -79,6 +79,8 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     - ${AIRFLOW_PROJ_DIR:-.}/data:/opt/airflow/data
     - ${AIRFLOW_PROJ_DIR:-.}/output:/opt/airflow/output
+    - ${AIRFLOW_PROJ_DIR:-.}/extracted_data:/opt/airflow/extracted_data
+    - ${AIRFLOW_PROJ_DIR:-.}/vizs:/opt/airflow/vizs
   user: "${AIRFLOW_UID:-50000}:0"
   # user: "0:0"
   depends_on:
